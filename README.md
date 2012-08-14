@@ -23,10 +23,15 @@ require_once(dirname(__FILE__) . 'quick_curl.php');
 curl_get($url) - Pass a fully qualified url.
 
 Return - A curl_response object with the following properties:
+
 $curl_return->response - The Full response.
+
 $curl_return->header   - Only the response header (As good as curls byte order lets us get).
+
 $curl_return->body     - Only the body (As good as curls byte order lets us get).
+
 $curl_return->error    - Curl Errors.
+
 $curl_return->info     - Extended Curl info.
 
 Usage - send_guerrilla.php
