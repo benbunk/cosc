@@ -3,32 +3,54 @@ cosc
 
 Captcha Outsourcing Cannon
 
-
-Usage
+Files
 ====
 
-Run testget.php to grab the raw html to your console.
+1. quick_curl.php - An include for reusable curl...its my personal cheat sheet thats faster then learning guzzle.
+2. send_guerrilla.php - A standalone script that allows you to get a mail message from the disposable mail service.
+3. get_captcha.php - Get a captcha image URL for a specific site and form combination. (Sometimes sitewide)
+4. get_userreg_form.php - Get the user registration form tokens for a Drupal site.
+5. send_userreg_form.php - Programmatically submit a Drupal user registration form using a previously solved 
+                         - captcha and form token.
 
-Find the following minimum fields (each form is different):
+Usage - quick_curl.php
+====
 
-Make sure this is whatever URL would be normally posted to...it can typically be found in the form
-declartion.
-$url = '';
+Include quick_curl.php at the top of your script. @see send_guerrilla.php 
 
-'form_build_id' => '',
-'captcha_sid' => '',
-'captcha_token' => '',
-'captcha_response' => 'reCAPTCHA',
+require_once(dirname(__FILE__) . 'quick_curl.php');
+  
+curl_get($url) - Pass a fully qualified url.
 
-See notes in the code on how to get this.
-'recaptcha_challenge_field' => '',
+Return - A curl_response object with the following properties:
 
-Using the notes in the code you can pull up the img url and fill this in manually.
-'recaptcha_response_field' => '',
+$curl_return->response - The Full response.
 
-Make sure this is set to whatever the page you're posting to is.
-CURLOPT_REFERER => '',
+$curl_return->header   - Only the response header (As good as curls byte order lets us get).
 
+$curl_return->body     - Only the body (As good as curls byte order lets us get).
 
-Once the above minimum variables and any required variables are filled in run testsend.php 
-and you should have successfully submitted the form.
+$curl_return->error    - Curl Errors.
+
+$curl_return->info     - Extended Curl info.
+
+Usage - send_guerrilla.php
+====
+
+For now all you can do is use the send_guerrilla.php file to get the 1st non-default email body for a specified 
+email address on the guerrillamail.com disposable email service.
+
+php send_querrilla.php
+
+You'll have to edit the php file to specify you email address in this line:
+
+$email = 'bbb+testcaptcha4';
+
+Replace bbb+testcaptcha4 with whatever you email address is...leave out the @guerrillamail.com part.
+
+To switch from fetching the demo email to fetching the 1st real email, comment out the Demo line and uncomment 
+the Live line. Like below:
+
+//$mail_offset = 0; // Demo
+$mail_offset = 1; // Live
+
