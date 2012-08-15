@@ -12,6 +12,7 @@ Files
 4. get_userreg_form.php - Get the user registration form tokens for a Drupal site.
 5. send_userreg_form.php - Programmatically submit a Drupal user registration form using a previously solved 
                          - captcha and form token.
+6. captcha_speed_test.html - Used in conjunction with get_captcha.php to test how fast a user can submit captchas.
 
 Usage - quick_curl.php
 ====
@@ -34,6 +35,8 @@ $curl_return->error    - Curl Errors.
 
 $curl_return->info     - Extended Curl info.
 
+curl_post($url, $post_fields) - Pass a fully qualified url and an array of post_fields. Otherwise same as above.
+
 Usage - send_guerrilla.php
 ====
 
@@ -44,13 +47,7 @@ php send_querrilla.php
 
 You'll have to edit the php file to specify you email address in this line:
 
-$email = 'bbb+testcaptcha4';
+$email = 'bbbtestcaptcha4';
 
-Replace bbb+testcaptcha4 with whatever you email address is...leave out the @guerrillamail.com part.
-
-To switch from fetching the demo email to fetching the 1st real email, comment out the Demo line and uncomment 
-the Live line. Like below:
-
-//$mail_offset = 0; // Demo
-$mail_offset = 1; // Live
+Replace bbbtestcaptcha4 with whatever you email address is...leave out the @guerrillamail.com part.
 
