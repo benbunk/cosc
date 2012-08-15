@@ -1,0 +1,58 @@
+<html>
+
+<head>
+ <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+</head>
+
+<body>
+
+<div class="result">
+  <img id="captcha_img" src="">
+  <form action="#" id="captcha_form">
+    <input type="text" id="captcha_response" />
+    <input type="button" value="submit" />
+  </form>
+</div>
+
+<div id="timer_start"></div>
+
+<div id="results">
+  <ul id="results_list">
+  </ul>
+</div>
+
+<script type="text/javascript">
+function getNext() {
+  url = 'http://localhost/~ben/getcap/get_captcha.php';
+  $.get(url, function (data) {
+    $(id=captcha_img).attr('src', data);
+  });
+}
+
+count = 0;
+
+$(document).ready(function() {
+  // Start with an image.
+  getNext();
+
+  // Set the time for reference.
+  var n = new Date();
+  var d = n.toTimeString();
+  $(id=timer_start).append('<p>' + d + '</p>');
+
+  // Take the submitted data, display it, clear the input, and get another image.
+  $(id=captcha_form).submit(function() {
+    count++;
+    $(id=results_list).append('<li>' + count + ' ' + $(id=captcha_response).val() + '</li>');
+    $(id=captcha_response).val('');
+    getNext();
+    return false;
+  });
+  
+});
+
+</script>
+
+</body>
+
+</html>
