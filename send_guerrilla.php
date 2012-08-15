@@ -1,9 +1,8 @@
 <?php
 
-require_once(dirname(__FILE__) . 'quick_curl.php');
+require_once(dirname(__FILE__) . '/quick_curl.php');
 
-$mail_offset = 0; // Demo
-//$mail_offset = 1; // Live
+$mail_offset = 0;
 
 /////// Setup a session
 // Set options
@@ -19,7 +18,7 @@ $json = json_decode($curl_return->body);
 /////// Register an email with the session.
 // Set options
 $sid_token = $json->sid_token;
-$email = 'bbb+testcaptcha4';
+$email = 'benbunktestcaptcha6';
 $url = 'https://www.guerrillamail.com/ajax.php?f=set_email_user&email_user=' . $email . '&sid_token=' . $sid_token;
 
 $curl_return = curl_get($url);
@@ -31,6 +30,7 @@ $url = 'https://www.guerrillamail.com/ajax.php?f=check_email&sid_token=' . $sid_
 
 $curl_return = curl_get($url);
 $json = json_decode($curl_return->body);
+var_dump($json);
 $mail_id = $json->list[$mail_offset]->mail_id;
 
 
@@ -40,4 +40,4 @@ $url = 'https://www.guerrillamail.com/ajax.php?f=fetch_email&sid_token=' . $sid_
 
 $curl_return = curl_get($url);
 $json = json_decode($curl_return->body);
-var_dump($json->mail_body);
+var_dump($json);
