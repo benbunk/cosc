@@ -1,7 +1,7 @@
 cosc
 ====
 
-Captcha Outsourcing Cannon
+Bordering on Evil - Captcha Outsourcing Cannon
 
 Files
 ====
